@@ -80,12 +80,13 @@ i = 0
 while True:
     try:
         for num in input().split(','):
-            observations[int(i/d)].append(float(num))
-            i+=1
+            observations[int(i / d)].append(float(num))
+            i += 1
     except EOFError:
         break
 for i in range(K):
     centroids.append(observations[i])
+
 # Calc centroids
 centroids = approximation_loop(centroids)
 
