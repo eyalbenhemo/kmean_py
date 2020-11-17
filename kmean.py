@@ -16,6 +16,7 @@ MAX_ITER = args.MAX_ITER
 assert K > 0 and N > 0 and d > 0 and MAX_ITER > 0
 assert K < N
 
+
 # Get list of index of observations and calc their avg
 def calc_centroid(lst):
     centroid = [0] * d
@@ -26,12 +27,14 @@ def calc_centroid(lst):
     centroid = [x / count for x in centroid]
     return centroid
 
+
 # Get 2 observations and calc their distance
 def euclidian_distance(a, b):
     dist = 0
     for i in range(d):
         dist += (a[i] - b[i]) ** 2
     return dist
+
 
 # Get observation index and centroids and return the closest centroid
 def find_closest_centroid(ind, centroids):
@@ -44,6 +47,7 @@ def find_closest_centroid(ind, centroids):
             min_cent = k
     return min_cent
 
+
 # Check if new_centroids equal centroids
 def check_if_equals(new_centroids, centroids):
     for i in range(K):
@@ -51,6 +55,7 @@ def check_if_equals(new_centroids, centroids):
             if new_centroids[i][j] != centroids[i][j]:
                 return False
     return True
+
 
 # Calc centroids while num of iter <= MAX_ITER and last(centroids) != centroids
 def approximation_loop(centroids):
@@ -67,18 +72,21 @@ def approximation_loop(centroids):
         centroids = new_centroids
     return centroids
 
-# Read from file
-filename = input("Insert File Name\n")
-file = open(filename)
-lines = file.readlines()
-observations = []
-centroids = []
-for i in range(len(lines)):
-    line = [float(r) for r in lines[i].replace("\n", "").split(',')]
-    observations.append(line)
-    if i < K:
-        centroids.append(line)
 
+# Read from input
+observations = [[] for i in range(N)]
+centroids = []
+i = 0
+while True:
+    try:
+        for num in input().split(','):
+            observations[int(i/d)].append(float(num))
+            i+=1
+    except EOFError:
+        break
+for i in range(K):
+    centroids.append(observations[i])
+# Calc centroids
 centroids = approximation_loop(centroids)
 
 # Print centroids
