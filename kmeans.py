@@ -2,19 +2,21 @@ import argparse
 
 # Read the args and put them in variables
 parser = argparse.ArgumentParser()
-parser.add_argument("K", type=int)
-parser.add_argument("N", type=int)
-parser.add_argument("d", type=int)
-parser.add_argument("MAX_ITER", type=int)
-args = parser.parse_args()
+parser.add_argument("K", nargs="?", type=int)
+parser.add_argument("N", nargs="?", type=int)
+parser.add_argument("d", nargs="?", type=int)
+parser.add_argument("MAX_ITER", nargs="?", type=int)
+args, unkown_args = parser.parse_known_args()
 K = args.K
 N = args.N
 d = args.d
 MAX_ITER = args.MAX_ITER
 
 # Assertions
-assert K > 0 and N > 0 and d > 0 and MAX_ITER > 0
-assert K < N
+assert len(unkown_args) == 0, "4 arguments needed"
+assert K is not None and N is not None and d is not None and MAX_ITER is not None, "4 arguments needed"
+assert K > 0 and N > 0 and d > 0 and MAX_ITER > 0, "K, N, d, MAX_ITER Have to be positive"
+assert K < N, "K must be less than N"
 
 
 # Get list of index of observations and calc their avg
