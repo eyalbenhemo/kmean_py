@@ -6,14 +6,14 @@ parser.add_argument("K", nargs="?", type=int)
 parser.add_argument("N", nargs="?", type=int)
 parser.add_argument("d", nargs="?", type=int)
 parser.add_argument("MAX_ITER", nargs="?", type=int)
-args, unkown_args = parser.parse_known_args()
+args, unknown_args = parser.parse_known_args()
 K = args.K
 N = args.N
 d = args.d
 MAX_ITER = args.MAX_ITER
 
 # Assertions
-assert len(unkown_args) == 0, "4 arguments needed"
+assert len(unknown_args) == 0, "4 arguments needed"
 assert K is not None and N is not None and d is not None and MAX_ITER is not None, "4 arguments needed"
 assert K > 0 and N > 0 and d > 0 and MAX_ITER > 0, "K, N, d, MAX_ITER Have to be positive"
 assert K < N, "K must be less than N"
@@ -76,7 +76,7 @@ def approximation_loop(centroids):
 
 
 # Read from input
-observations = [[] for i in range(N)]
+observations = [[] for j in range(N)]
 centroids = []
 i = 0
 while True:
